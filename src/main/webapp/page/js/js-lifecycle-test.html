@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>page title here</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script>
+window.onload = function() { // 문서의 읽기와 랜더링이 모두 끝난 시점
+	console.log('onload:', document.querySelector('div'));
+}
+$(document).ready(function() { // DOM 생성이 완료된 시점
+	console.log('ready:', document.querySelector('div'));
+	
+	function fn2() {
+		// 얘는 밖에서 호출이 되나?
+		console.log('hello world!')
+	}
+	$('button').click(fn2);
+});
+// 라이프 사이클이란?
+// 변수나 함수가 생존하는 시점 혹은 범위 (= scope, 유효범위)
+// js는 자바와 달리 블록이 아니라 함수를 기준으로 유효범위가 정해진다.
+
+var a = 1; // 전역으로 선언된 a
+function fn() {
+	var a = 2; // 로컬로 선언된 a
+	console.log('test #1 a:', a); // 2, 로컬이 출력됨
+	{
+		var b = 123;		
+	}
+	console.log('hi', b);
+	
+	for (var i = 0; i < 10; ++i) {}
+	console.log('hellooo', i);
+	
+	for (let j = 0; j < 10; ++j) {}
+	// console.log('hellooo', j); // Uncaught ReferenceError: j is not defined
+}
+fn();
+console.log('test #2 a:', a); // 1, 전역변수가 출력됨
+
+function fn2() {
+	a = 3; // 전역 변수 a를 재할당하는 표현식
+	console.log('test #3 a:', a); // 3, 전역 변수가 출력됨
+}
+fn2();
+console.log('test #4 a:', a); // 3
+
+console.log(typeof fn2); // undefined
+</script>
+</head>
+<body>
+<div class="align-center" id="article">
+	<h1>javascript lifecycle test</h1>
+	<hr>
+	<p>description</p>
+	<button type="button">테스트용 버튼 #1</button>
+</div>
+</body>
+</html>

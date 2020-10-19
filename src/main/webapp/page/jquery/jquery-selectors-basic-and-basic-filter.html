@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: selectors-basic, basic filter</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<style>
+h3 {
+  margin: 0;
+}
+section {
+	border: 1px solid black;
+}
+section div, section span, section p {
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #EEEEEE;
+}
+.affected {
+	border: 3px solid red;
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+selectors: https://api.jquery.com/category/selectors/
+
+jQueyr에서 셀렉터란 jQuery( selector [, context] ) 메서드를 사용할 때 첫 번째 인자로 전달하는, 
+찾을 요소가 무엇인지를 정의하는 CSS 셀렉터를 확장하는 문자열을 말한다.
+*/
+// # basic
+
+// ## All Selector('*')
+// 모든 DOM 요소를 선택하는 셀렉터. 사실상 쓸 일은 음슴.
+function fn1() {
+	$('section *').addClass('affected');
+}
+
+// ## Class Selector ('.class')
+// .과 클래스 속성의 값을 적는다. 해당 클래스가 부여된 모든 요소를 찾는다.
+// $('.outter')...
+
+// ## Element Selector ('element')
+// 찾을 태그를 입력한다. 모든 태그가 반환된다.
+// $('div')..., $('fieldset')..., ...
+
+// ## ID Selector ('#id')
+// $('#my-id')...
+
+// ## Multiple Selector ('selector1, selector2, selectorN')
+// 각 셀렉터 사이에 쉼표(,)가 있으면 멀티 선택으로 작동한다. 쉼표를 사용할 때 따옴표를 닫으면 안된다.
+function fn2() {
+	$('section div, .mom, #abc').addClass('affected');
+}
+
+// # basic filter
+// 필터는 셀렉터에 쉼표 없이 붙여서 사용하며 앞의 셀렉터를 보조하여 좀 더 상세한 탐색을 위해 사용한다.
+// :eq(), :first() 등의 pseudo 클래스는 3.4버전부터 deprecated 상태이므로 생략한다.
+
+// ## :focus Selector
+// 현재 포커스 상태의 요소를 반환한다.
+function fn3() {
+	setInterval(() => {
+		$('*:focus').addClass('affected');
+	}, 2000);
+}
+
+// ## :header Selector
+// 헤더 태그를 모두 반환(h1, h2, h3, ...)
+function fn4() {
+	$('*:header').addClass('affected');
+}
+
+// ## :not() Selector
+// 셀렉터로 선택한 요소 중 제거할 조건을 입력하면 해당 요소를 제외하고 반환한다.
+function fn5(e) {
+	var $t = $(e.target);
+	var $section = $t.parent().next();
+	$('button:not(#not-me)', $section).addClass('affected');
+	// 다른 pseudo 클래스와 조합하면 $('div:not(:has(button))') 이렇게도 쓸 수 있다.
+}
+
+// ## :first-child
+// 한 개 이상의 요소를 반환하되, 주어진 조건의... 더 이상의 설명은 생략한다.
+// 각 부모의 첫 번째 자식 모두를 반환한다.
+function fn6() {
+	$('ul li b:first-child').addClass('affected');
+}
+	
+// ## :target Selector
+function fn7() {
+	$(':target').addClass('affected');
+}
+
+</script>
+</head>
+<body>
+<div class="align-center">
+	<h1>jQuery: selectors-basic, basic filter</h1>
+	<hr>
+	
+	<div><button onclick="fn1()">All Selector</button></div>
+	<div><button onclick="fn2()">Multiple Selector</button></div>
+	<div><button onclick="fn3()">activate :focus Selector</button></div>
+	<section>
+		<div>DIV</div>
+		<span class="mom">SPAN</span>
+		<p>P <button id="abc">Button</button></p>
+	</section> <br>
+	
+	<div><button onclick="fn4()">:header Selector</button></div>
+	<section>
+		<header>헤더?</header>
+		<h1>헤더</h1>
+		<h2>헤더</h2>
+		<h3>헤더</h3>
+		<h4>헤더</h4>
+		<h5>헤더</h5>
+		<h6>헤더</h6>
+	</section> <br>
+	
+	<div><button onclick="fn5(event)">:not() Selector</button></div>
+	<section>
+		<button>Button</button>
+		<button id="not-me">Button</button>
+	</section> <br>
+	
+	<div><button onclick="fn6()">:first-child Selector</button></div>
+	<section>
+		<ul>
+			<li><b>Hello</b> <b>world</b></li>
+			<li><b>Hello</b> <b>world</b></li>
+			<li><b>Hello</b> <b>world</b></li>
+		</ul>
+		<ul>
+			<li><b>Hello</b> <b>world</b></li>
+			<li><b>Hello</b> <b>world</b></li>
+			<li><b>Hello</b> <b>world</b></li>
+		</ul>
+	</section> <br>
+	
+	<div><a href="#abcdefg">이걸 먼저 눌러</a></div>
+	<div><button onclick="fn7()">:target Selector</button></div>
+	<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+	<section>
+		<h4 id="abcdefg">abcdefg</h4>
+	</section> <br>
+</div>
+</body>
+</html>

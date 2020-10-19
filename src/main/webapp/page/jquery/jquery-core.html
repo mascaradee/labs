@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: core</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+코어: https://api.jquery.com/category/core/
+*/
+
+// jQuery는 $로 대체할 수 있다.
+// $가 싫으면 다른걸로 바꿀 수 있다. jQuery는 $를 재정의하는 함수를 제공한다. 뭐인지는 몲
+
+// jQuery( callback )
+// DOM 생성이 모두 완료되면 실행할 함수를 지정하는 메서드
+// $(document).ready(fn)와 같다.
+$(function() {
+	console.log('모든 P 태그의 수:', $('p').length);	
+	$('button').click(rm);
+});
+
+function rm() {
+	$('div:first').remove();
+}
+</script>
+</head>
+<body>
+<div class="align-center">
+	<h1>jQuery: core</h1>
+	<hr>
+	<p>description</p>
+	
+	<h2>sub title</h2>
+	<p>대문자는 h1까지만 하기로 하자.</p>
+	
+	<ul>
+		<li> </li>
+		<li><p>hello</p></li>
+		<li> </li>
+	</ul>
+</div>
+<script>
+// jQuery( selector [, context] )
+// 가장 자주 쓰게 될 jQuery 셀렉터
+// - selector: jQuery 셀렉터 문법으로 작성된(CSS3 셀렉터를 확장한다) 문자열
+// - context: 탐색할 범위를 의미한다. 찾을 대상의 부모. 가령 context가 'div#abc'인 경우 ID가 abc인 DIV 태그 하위의 요소만 탐색한다.
+
+var $firstHeader = $('h1:first');
+var $phraseInUnorderedList = $('p', 'ul'); // $('ul').find('p') 와 같음.
+
+// jQuery( element ) 
+// 자바스크립트로 얻어낸 DOM을 파라미터로 전달하면 jQuery 객체로 만들어 반환하는 메서드
+var h1 = document.querySelector('h1'); // DOM 가져오기
+var $h1 = $(h1); // H1 DOM을 jQuery 객체로 변환
+console.log($h1[0] === h1); // true
+$h1.find('div'); // H1 하위 노드에서 div 탐색
+
+// jQuery( elementArray )
+// 바로 위 메서드과 크게 다르지 않고 단지 DOM을 배열 형식으로 던지면 jQuery 객체도 내부의 배열에 해당 요소를 담아서 되돌려줌
+var lies = document.querySelectorAll('li');
+console.log(lies.length); // 3
+var $lies = $(lies);
+console.log($lies[0] === lies[0]); // true
+$lies.find('p'); // 모든 선택된 li 태그 하위 노드에서 p 탐색
+
+// jQuery( html [, ownerDocument] )
+// document.createElement()와 흡사한 메서드
+// - html: 생성할 DOM을 의미하는 태그 형식의 문자열
+// - ownerDocument: DOM을 소유할 문서 객체. document 객체가 여러개일 경우는 거의 없으므로 안쓴다고 보면 된다.
+var $newEle = $('<div>야이뇸아</div>');
+$('div:first').append($newEle);
+
+// jQuery( html, attributes )
+// - attributes: 새로 만들어질 요소의 속성, 이벤트, 메서드를 정의
+// 이 방식의 경우 html은 태그 바디에 어떤한 텍스트도 있어선 안된다.
+var $newEle2 = $('<button></button>', {
+	'text': '누질러요',
+	'class': 'hoho',
+	'on': {
+		'click': (event) => {
+			console.log('나 불렀엉?');
+		}
+	}
+});
+$('div:first').append($newEle2);
+
+// jQuery.noConflict( [removeAll] )
+// - removeAll: true로 지정하면 jQuery를 의미하는 모든 변수를 초기화한다.
+// jQuery 객체를 의미하는 '$' 변수를 초기화하는 메서드.
+// '$'라는 이름이 다른 자바스크립트 라이브러리와 겹칠 경우에 사용한다.
+</script>
+</body>
+</html>

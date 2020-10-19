@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: selectors-form</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<style>
+/* h3 { */
+/*   margin: 0; */
+/* } */
+/* section { */
+/* 	border: 1px solid black; */
+/* } */
+/* section div, section span, section p { */
+/*   width: 80px; */
+/*   height: 40px; */
+/*   padding: 10px; */
+/*   margin: 10px; */
+/*   background-color: #EEEEEE; */
+/* } */
+.affected {
+	border: 3px solid red;
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+selectors: https://api.jquery.com/category/selectors/
+
+jQueyr에서 셀렉터란 jQuery( selector [, context] ) 메서드를 사용할 때 첫 번째 인자로 전달하는, 
+찾을 요소가 무엇인지를 정의하는 CSS 셀렉터를 확장하는 문자열을 말한다.
+*/
+
+// # form 
+
+// ## :input selector
+// 모든 <input>, <textarea>, <select>, <button>을 선택하는 셀렉터
+// $(':input')...
+
+// ## type selector
+// <input> 태그의 타입을 선택하는 셀렉터
+// :text
+// :checkbox
+// :file
+// :image
+// :password
+// :radio
+// :submit
+// :reset
+
+// ## :button selector
+// <button> 태그와 <input type="button"> 태그를 선택하는 셀렉터
+
+// ## :checked selector
+// checkbox와 radio 태그 중 check가 되어 있는 태그를 선택하는 셀렉터
+
+// ## :selected selector
+// <option> 태그 중 선택된 태그만  
+
+// ## :disabled, enabled selector
+// disabled 상태이거나 아닌 태그를 선택하는 셀렉터
+
+// ## :focus
+// 현재 focus 상태인 태그를 선택하는 셀렉터
+
+function fn7(){
+  console.log($(':selected').text());
+}
+
+</script>
+</head>
+<body>
+<div class="align-center">
+	<h1>jQuery: selectors-form</h1>
+	<hr>
+	
+	<div><button onclick="fn1()">asdfqwe</button></div>
+	<section>
+		<form>
+			<fieldset>
+				<input type="text">
+				<input type="text" value="123">
+				<input type="button">
+				<input type="reset" value="리셋1">
+				<button type="reset">리셋2</button>
+				<textarea></textarea>
+			</fieldset>
+		</form>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<input type="text">
+			<input type="checkbox">1 <br>
+			<input type="radio"> 2 <br>
+		</fieldset>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<select>
+				<option>1</option>
+				<option selected>2</option>
+			</select>
+			<select>
+				<option>1</option>
+				<option>2</option>
+			</select>
+		</fieldset>		
+	</section> <br>
+<div class="align-center">
+  <div><button onclick="fn7()">:selected selector</button></div>
+  <section>
+    <fieldset>
+      <select>
+      	<option></option>
+        <option>1</option>
+        <option selected>2</option>
+      </select>
+    
+    </fieldset>		
+  </section> <br>
+</div>
+</div>
+</div>
+	
+</div>
+</body>
+</html>

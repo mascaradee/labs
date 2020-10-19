@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>page title here</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script>
+$(document).ready(function() { // DOM 생성이 완료된 시점
+	// #1
+	$('#article').append('<button type="button">뀨?</button>')
+	
+	// #2
+// 	var $ele = $('<button>');
+// 	$ele.attr('type', 'button');
+// 	$ele.text('뀨뀨?');
+// 	$('#article').append($ele);
+});
+</script>
+</head>
+<body>
+<div class="align-center" id="article">
+	<h1>jQuery create element test</h1>
+	<hr>
+	<p>description</p>
+</div>
+</body>
+</html>

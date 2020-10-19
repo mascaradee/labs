@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>page title here</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script>
+// 클로저란?
+// 함수 안에서 정의되어 유효범위가 끝난 변수나 함수가 유효범위 밖에서 생존하는 특성
+
+// 클로저가 아닌 예
+function fn() {
+	var a = 1;
+	console.log(a); // 1
+}
+console.log(typeof a); // undifined
+	
+// 클로저 예시(a가 클로저 스코프에 해당하는 변수)
+function getInnerFunction() {
+  var a = 'still alive';
+  function inner() {
+    console.log(a); // 'still alive'
+  }
+  return inner;
+}
+var b = getInnerFunction();
+debugger;
+b(); // 'still alive'
+</script>
+</head>
+<body>
+<div class="align-center" id="article">
+	<h1>javascript closures test</h1>
+	<hr>
+	<p>description</p>
+	<button type="button">테스트용 버튼 #1</button>
+</div>
+</body>
+</html>

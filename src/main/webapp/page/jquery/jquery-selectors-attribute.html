@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: selectors-attribute</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<style>
+h3 {
+  margin: 0;
+}
+section {
+	border: 1px solid black;
+}
+section div, section span, section p {
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #EEEEEE;
+}
+.affected {
+	border: 3px solid red;
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+selectors: https://api.jquery.com/category/selectors/
+
+jQueyr에서 셀렉터란 jQuery( selector [, context] ) 메서드를 사용할 때 첫 번째 인자로 전달하는, 
+찾을 요소가 무엇인지를 정의하는 CSS 셀렉터를 확장하는 문자열을 말한다.
+*/
+
+// Attribute Contains Prefix Selector [name|=”value”]
+// jQuery( '[ attribute |= "value"] ')
+// - attribute: 찾으려는 속성
+// - value: 찾으려는 속성의 값. value와 완전히 일치하는 단어로 시작하면 모두 반환
+function testAttrPrefixSelector() {
+	$('[name|=abc]').addClass('affected');
+}
+
+// Attribute Contains Selector [name*=”value”]
+// jQuery( '[ attribute *= "value"] ')
+// - value: 찾으려는 속성의 값. 위치에 상관없이 이 값이 포함되어 있으면 모두 반환
+function testAttrContainsSelector() {
+	$('[name*=c]').addClass('affected');
+}
+
+// Attribute Contains Word Selector [name~=”value”]
+// jQuery( '[attribute ~= "value"] ')
+// - value: 찾으려는 속성의 값. 위치에 상관없이 단어가 포함되어 있으면 모두 반환. 여기서 단어는 빈칸으로 구분한 문자를 말한다.
+function testAttrContainsWordSelector() {
+	$('[data-identifier~=man]').addClass('affected');	
+}
+
+// Attribute Starts With Selector [name^=”value”]
+// jQuery( '[attribute ^= "value"] ')
+// - value: 속성의 값이 value로 시작하는 태그를 모조리 반환
+function testAttrStartsWithSelector() {
+	$('[name^=dc]').addClass('affected');
+}
+
+// Attribute Ends With Selector [name$=”value”]
+// jQuery( '[attribute $= "value"] ')
+// - value: 속성의 값이 value로 끝나는 태그를 모조리 반환
+function testAttrEndsWithSelector() {
+	$('[name$=qwer]').addClass('affected');
+}
+
+// Attribute Not Equal Selector [name!=”value”]
+// jQuery( '[attribute != "value"] ')
+// - value: 속성의 값이 value와 일치하지 않으면 모두 반환
+function testAttrNotEqualSelector() {
+	$('[name!=asdf]').addClass('affected');
+}
+
+// Attribute Equal Selector [name=”value”]
+// jQuery( '[attribute = "value"] ')
+// - value: 속성의 값이 value와 일치하면 모두 반환
+function testAttrEqualSelector() {
+	$('[name=asdf]').addClass('affected');
+}
+
+</script>
+</head>
+<body>
+<div class="align-center">
+	<h1>jQuery: selectors-attribute</h1>
+	<hr>
+	
+	<div><button onclick="testAllSelector()">All Selector</button></div>
+	<section>
+		<div>DIV</div>
+		<span>SPAN</span>
+		<p>P <button>Button</button></p>
+	</section> <br>
+	
+	<div><button onclick="testAttrPrefixSelector()">attr prefix selector</button></div>
+	<div><button onclick="testAttrContainsSelector()">attr contains selector</button></div>
+	<section>
+		<div name="abc">DIV</div>
+		<span name="abc-456">SPAN</span>
+		<p name="abc789">P <button name="abc 789">Button</button></p>
+	</section><br>
+	
+	<div><button onclick="testAttrContainsWordSelector()">attr contains word selector</button></div>
+	<section>
+		<div data-identifier="earth-man">DIV</div>
+		<span data-identifier="woman">SPAN</span>
+		<p data-identifier="man ual">P <button data-identifier="manAtArms">Button</button></p>
+	</section><br>
+	
+	<div><button onclick="testAttrStartsWithSelector()">attr starts with selector</button></div>
+	<section>
+		<div name="00dcba00">DIV</div>
+		<span name="dcba0000">SPAN</span>
+		<p name="dcba789">P <button name="dcba 789">Button</button></p>
+	</section><br>
+	
+	<div><button onclick="testAttrEndsWithSelector()">attr ends with selector</button></div>
+	<section>
+		<div name="00qwer00">DIV</div>
+		<span name="qwer0000">SPAN</span>
+		<p name="789qwer">P <button name="789 qwer">Button</button></p>
+	</section><br>
+	
+	<div><button onclick="testAttrNotEqualSelector()">attr not equal selector</button></div>
+	<div><button onclick="testAttrEqualSelector()">attr equal selector</button></div>
+	<section>
+		<div name="asdf">DIV</div>
+		<span name="asdf">SPAN</span>
+		<p name="asdf">P <button name="asdf">Button</button></p>
+	</section><br>
+</div>
+</body>
+</html>

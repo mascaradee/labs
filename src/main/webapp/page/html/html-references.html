@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>page title here</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+<div class="align-center" id="article">
+	<h1>HTML references</h1>
+	<hr>
+	<a href="https://www.w3schools.com/tags/default.asp">참고 사이트: w3school html element reference</a>
+	<p>description</p>
+	<button type="button">테스트용 버튼 #1</button>
+	<h2>a</h2>
+	<button type="button" onclick="window.open('', 'waldo')">팝업 띄우기</button><br>
+	<a href="https://google.co.kr">현재 창에서 열기</a><br>
+	<a href="https://daum.net" target="_blank">매번 새 창에서 열기</a><br>
+	<!-- 아래는 pseudo protocol이란 방식인데, 브라우저의 기본 기능(새 창으로 열기)이 무력화되므로 안쓰는게 좋다. -->
+	<a href="javascript: location.href = 'https://google.co.kr'">google.co.kr</a><br>
+	<h2>fieldset</h2>
+	<button type="button" onclick="document.querySelector('#f1').disabled = true">레게노 체크박스 비활성화</button>
+	<form>
+		<fieldset id="f1">
+			<legend>레게노</legend>
+			<input type="checkbox">레
+			<input type="checkbox">게
+		</fieldset>
+		<fieldset id="f2">
+			<legend>레잔도</legend>
+			<input type="checkbox">잔
+			<input type="checkbox">도
+		</fieldset>
+	</form>
+	<h2>code, pre</h2>
+	<code>System.out.println('aaa');</code>
+	<pre>function fn() {
+    console.log('hello world!');
+}</pre>
+	<h2>&amp;nbsp;</h2>
+	<p>non&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break&nbsp;&nbsp;&nbsp;&nbsp;space</p>
+	<h2>ins, del, s</h2>
+	<s>&lt;s&gt; 태그는 이전에 작성된 내용을 틀린 내용으로 표시할 때 사용함</s><br>
+	<del>del은 s랑 비슷하지만, 반드시 ins가 뒤따라야 함.</del><br>
+	<ins>ins는 del을 대체하는 라인을 의미함</ins>
+	
+</div>
+</body>
+</html>
