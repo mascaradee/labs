@@ -38,7 +38,8 @@
 				<li><a href="/page/jquery/jquery-selectors-attribute.html">jquery-selectors-attribute</a></li>
 				<li><a href="/page/jquery/jquery-selectors-basic-and-basic-filter.html">jquery-selectors-basic-and-basic-filter</a></li>
 				<li><a href="/page/jquery/jquery-selectors-form.html">jquery-selectors-form</a></li>
-				
+				<li><a href="/page/jquery/jquery-selectors-hierarchy.html">jquery-selectors-hierarchy</a></li>
+				<li><a href="/page/jquery/jquery-traversing.html">jquery-traversing</a></li>
 				<li><a href="/page/jquery/jquery-attributes.html">jquery-attributes</a></li>
 			</ul>
 			<h4>HTML</h4>
