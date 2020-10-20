@@ -24,7 +24,7 @@ public class ExampleController {
 		
 		// TODO 아래 메서드 내부에서 브레이크 걸어보면 CGLIB 스택이 중간에 없다. 트랜잭션 설정 제대로(WebConfig.java) 해놓고 다시 해봐야 함.
 		exampleService.invokeWithTransaction();
-		
+
 		mv.setViewName("/example/example");
 		return mv;
 	}

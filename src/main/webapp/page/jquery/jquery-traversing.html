@@ -34,13 +34,63 @@ todo
 
 // # traversing
 
+// ## .add()
+// 선택한 객체 배열에 다른 요소를 추가한다.
+// $('input:button').add('input:checkbox').add('select');
+
+// ## .addBack()
+// 선택한 객체 배열에 이전 순서에서 선택한 요소를 추가한다.
+// $('input:button').next().addBack();
+
+// ## .children()
+// 선택한 요소(들)의 직계 자손을 선택한다.
+// $('div.align-center:first').children();
+// $('div.align-center:first').children('section');
+
+// ## .closest()
+// 선택한 요소(들)의 부모들 중 조건에 맞는 가장 가까운 부모를 선택한다.
+// $('#me').closest('.abc')
+
+// ## .contents()
+// 선택한 요소(들)의 텍스트 노드를 선택한다.
+
+// ## .each()
+// 선택한 요소만큼 반복하며 콜백 함수를 실행한다.
+/*
+var $section = $('section');
+$section.each(function(idx, ele) {
+	console.log('idx:', idx);
+	console.log('ele:', ele);
+	if (idx == 1) {
+		// .each() 에서는 return 혹은 return true가 continue, return false가 break다.
+		return true;
+	}
+	var $target = $(ele);
+	$target.children().remove();
+});
+*/
+
+// ## .end()
+// 쉽게 말해서, traversing 카테고리의 메서드의 실행을 한 번 되돌린다.
+// $('section').eq(1).next().next().end().end();
+
+// ## .eq()
+// 선택한 요소들의 순서를 지정해 하나만 선택한다.
+// $('section').eq(2); // 세 번째 <section>만 선택.
+
 </script>
 </head>
 <body>
-<div class="align-center">
+<div class="align-center abc" id="grandgrandfather"> 
 	<h1>jQuery: traversing</h1>
 	<hr>
-		
+	
+	<div class="abc" id="grandfather">
+		<div id="fahter">
+			<article id="me"></article>
+		</div>
+	</div>
+	
 	<div><button onclick="fn1()">asdfqwe</button></div>
 	<section>
 		<form>
@@ -75,22 +125,6 @@ todo
 			</select>
 		</fieldset>		
 	</section> <br>
-<div class="align-center">
-  <div><button onclick="fn7()">:selected selector</button></div>
-  <section>
-    <fieldset>
-      <select>
-      	<option></option>
-        <option>1</option>
-        <option selected>2</option>
-      </select>
-    
-    </fieldset>		
-  </section> <br>
-</div>
-</div>
-</div>
-	
 </div>
 </body>
 </html>
