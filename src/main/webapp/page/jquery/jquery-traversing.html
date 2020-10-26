@@ -78,6 +78,22 @@ $section.each(function(idx, ele) {
 // 선택한 요소들의 순서를 지정해 하나만 선택한다.
 // $('section').eq(2); // 세 번째 <section>만 선택.
 
+// ## .filter()
+// 선택한 요소들에 조건을 대입해 걸러내는 메서드. 조건은 셀렉터 작성법과 완전히 같다.
+// var $inpts = $('input');
+// var $bttns = $ele.filter(':button');
+
+// ## .find()
+// 선택한 요소들의 하위 요소에서 지정한 요소를 선택한다.
+// $('section').find(':button')
+
+// ## .is()
+// 선택한 요소가 주어진 조건에 맞으면 true, 아니면 false 반환
+// $('input').eq(2).is('[value]')
+// var trueOrNot = $('input').is(function(idx, ele) {
+//   return $(ele).is(':button'); 
+// }); // 'input' 중에 ':button'이 하나라도 있으면 true
+
 </script>
 </head>
 <body>
