@@ -83,6 +83,10 @@ $section.each(function(idx, ele) {
 // var $inpts = $('input');
 // var $bttns = $ele.filter(':button');
 
+// ## .not()
+// 선택한 요소 배열에서 주어진 조건에 맞는 요소를 제거한다. .filter()의 반대격인 메서드다.
+// $('div').not('[class]')
+
 // ## .find()
 // 선택한 요소들의 하위 요소에서 지정한 요소를 선택한다.
 // $('section').find(':button')
@@ -94,6 +98,45 @@ $section.each(function(idx, ele) {
 //   return $(ele).is(':button'); 
 // }); // 'input' 중에 ':button'이 하나라도 있으면 true
 
+// ## .has()
+// 선택한 요소 중 주어진 조건에 맞는 요소를 자손으로 포함하고 있는 요소만 남김.
+// $('section').has('select')
+
+// ## .next() / .prev()
+// 선택한 요소의 바로 다음 혹은 바로 전 요소를 선택한다.
+
+// ## .nextAll() / .prevAll()
+// 선택한 요소 다음(혹은 이전)의 모든 요소를 선택한다. 단, 형제 레벨의 요소만.
+// $('#grandfather').nextAll()
+// $('#grandfather').nextAll('section')
+
+// ## .nextUntil() / .prevUntil()
+// 선택한 요소 다음(혹은 이전) 요소부터, 주어진 조건의 요소 전까지 선택한다.
+// $('#grandfather').nextUntil('section:last')
+
+// ## .offsetParent()
+// .closest()와 비슷한 메서드. 가장 가까운 조상 중 positioned 상태인 조상을 선택한다. 
+// positioned 상태란, position style의 값이 relative, absolute, fixed인 것을 의미한다.
+
+// ## .parent()
+// 선택한 요소의 바로 위 부모를 선택한다.
+
+// ## .parents()
+// 선택한 요소의 직계 조상 중 주어진 조건에 해당하는 모든 요소를 선택한다.
+
+// ## .parentUntil()
+// 선택한 요소의 직계 조상 중 주어진 조건에 해당하는 요소 직전까지 모두 선택한다.
+
+// ## .siblings()
+// 선택한 요소의 형제 중 조건에 맞는 모든 요소를 선택한다. (nextAll과 prevAll을 합친거라고 보면 된다)
+
+// ## .slice()
+// substring처럼 시작 인덱스 종료 인덱스(종료 인덱스는 생략 가능)를 지정하여 선택한 요소 배열을 잘라내는 메서드.
+// $('div').slice(2); // 모든 div를 선택 후, 첫 번째와 두 번째 div는 배열에서 제거한다.
+// $('div').slice(2, 4); // 모든 div를 선택 후, 세 번째와 네 번째 div 외 모든 요소를 배열에서 제거한다.
+
+// TODO ## .map()
+
 </script>
 </head>
 <body>
@@ -102,13 +145,13 @@ $section.each(function(idx, ele) {
 	<hr>
 	
 	<div class="abc" id="grandfather">
-		<div id="fahter">
+		<div id="father">
 			<article id="me"></article>
 		</div>
 	</div>
 	
-	<div><button onclick="fn1()">asdfqwe</button></div>
-	<section>
+	<div id="imNext"><button onclick="fn1()">asdfqwe</button></div>
+	<section style="position: relative;">
 		<form>
 			<fieldset>
 				<input type="text">
