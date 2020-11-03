@@ -10,11 +10,27 @@ $(document).ready(function() { // DOM 생성이 완료된 시점
 	// #1
 	$('#article').append('<button type="button">뀨?</button>')
 	
+	var $newEle = $('<div>야이뇸아</div>');
+	$('div:first').append($newEle);
+	
 	// #2
-// 	var $ele = $('<button>');
-// 	$ele.attr('type', 'button');
-// 	$ele.text('뀨뀨?');
-// 	$('#article').append($ele);
+	var $ele = $('<button>');
+	$ele.attr('type', 'button');
+	$ele.text('뀨뀨?');
+	$('#article').append($ele);
+
+
+	// #3
+	var $newEle2 = $('<button></button>', {
+		'text': '누질러요',
+		'class': 'hoho',
+		'on': {
+			'click': (event) => {
+				console.log('나 불렀엉?');
+			}
+		}
+	});
+	$('div:first').append($newEle2);
 });
 </script>
 </head>

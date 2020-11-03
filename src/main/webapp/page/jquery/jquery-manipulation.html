@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: css</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<style>
+h3 {
+  margin: 0;
+}
+section {
+	border: 1px solid black;
+}
+section div, section span, section p {
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #EEEEEE;
+}
+.affected {
+	border: 3px solid red;
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+manipulation: https://api.jquery.com/category/manipulation/
+
+*/
+
+// # manipulation
+
+// ## .after(), .before(), .insertAfter(), .insertBefore()
+// 지정한 요소나 새로 만든 요소를 선택한 요소의 뒤 혹은 앞에 붙여넣는다. 
+// .append()나 .prepend()는 선택 요소의 자식이 되며, .after()나 .before()는 선택 요소의 형제가 된다.
+// $('#father').after('<div id="uncle-sam"></div>'); // 새 요소를 추가하는 방식
+// $('#father').after($('article#me')); // 기존 요소의 위치를 변경하는 방식
+// $('article#me').insertAfter('#father');
+
+// ## .append(), .prepend(), .appendTo(), .prependTo()
+// 지정한 요소나 새로 만든 요소를 선택한 요소의 안쪽 마지막 혹은 맨 앞에 붙여넣는다.
+// $('#father').append('<div id="주워온아이"></div>'); // 새 요소를 추가하는 방식
+// $('#father').append($('#imNext')); // 기존 요소의 위치를 변경하는 방식
+// $('#imNext').appendTo('#father');
+
+// 
+</script>
+</head>
+<body>
+<div class="align-center abc" id="grandgrandfather"> 
+	<h1>jQuery: manipulation</h1>
+	<hr>
+	
+	<div class="abc" id="grandfather">
+		<div id="father">
+			<article id="me"></article>
+		</div>
+	</div>
+	
+	<div id="imNext"><button onclick="fn1()">asdfqwe</button></div>
+	<section style="position: relative;">
+		<form>
+			<fieldset>
+				<input type="text">
+				<input type="text" value="123">
+				<input type="button">
+				<input type="reset" value="리셋1">
+				<button type="reset">리셋2</button>
+				<textarea></textarea>
+			</fieldset>
+		</form>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<input type="text">
+			<input type="checkbox">1 <br>
+			<input type="radio"> 2 <br>
+		</fieldset>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<select>
+				<option>1</option>
+				<option selected>2</option>
+			</select>
+			<select>
+				<option>1</option>
+				<option>2</option>
+			</select>
+		</fieldset>		
+	</section> <br>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: css</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<style>
+h3 {
+  margin: 0;
+}
+section {
+	border: 1px solid black;
+}
+section div, section span, section p {
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #EEEEEE;
+}
+.affected {
+	border: 3px solid red;
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+css: https://api.jquery.com/category/css/
+
+*/
+
+// # css
+
+// ## .addClass()
+// 선택한 요소에 클래스를 더한다.
+// $('input').addClass('affected');
+// $('input').addClass('affected, second-one, third-one');
+
+// ## .hasClass()
+// 선택한 요소에 지정한 클래스가 있으면 true, 아니면 false 반환
+// $('input').hasClass('second-one');
+
+// ## .toggleClass()
+// 선택한 요소에 지정한 클래스를 토글한다. 클래스가 없으면 추가하고 있으면 지운다.
+// $('input').toggleClass('second-one');
+
+// ## .css()
+// 선택한 요소의 스타일을 변경한다. 혹은 선택한 요소의 특정 스타일을 가져온다.
+// $('div').css('display', 'none'); // display 스타일의 값을 none으로 변경
+// $('div').css('display'); // display 스타일의 값을 반환
+
+</script>
+</head>
+<body>
+<div class="align-center abc" id="grandgrandfather"> 
+	<h1>jQuery: css</h1>
+	<hr>
+	
+	<div class="abc" id="grandfather">
+		<div id="father">
+			<article id="me"></article>
+		</div>
+	</div>
+	
+	<div id="imNext"><button onclick="fn1()">asdfqwe</button></div>
+	<section style="position: relative;">
+		<form>
+			<fieldset>
+				<input type="text">
+				<input type="text" value="123">
+				<input type="button">
+				<input type="reset" value="리셋1">
+				<button type="reset">리셋2</button>
+				<textarea></textarea>
+			</fieldset>
+		</form>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<input type="text">
+			<input type="checkbox">1 <br>
+			<input type="radio"> 2 <br>
+		</fieldset>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<select>
+				<option>1</option>
+				<option selected>2</option>
+			</select>
+			<select>
+				<option>1</option>
+				<option>2</option>
+			</select>
+		</fieldset>		
+	</section> <br>
+</div>
+</body>
+</html>
