@@ -45,7 +45,37 @@ manipulation: https://api.jquery.com/category/manipulation/
 // $('#father').append($('#imNext')); // 기존 요소의 위치를 변경하는 방식
 // $('#imNext').appendTo('#father');
 
-// 
+// ## .remove()
+// 선택한 요소를 삭제한다.
+// $('div').remove()
+
+// ## .replaceWith() .replaceAll(),
+// 선택한 요소를 주어진 태그로 대체하며 원래 있던 요소는 삭제한다. .replaceAll()은 replace의 대상과 피대상을 반대로 적용하는 메서드다.
+// $( "div.inner" ).replaceWith( "<h2>New heading</h2>" );
+// $( "<h2>New heading</h2>" ).replaceAll( ".inner" );
+
+// ## .text()
+// 파라미터 없이 쓰일 경우 선택한 요소 하위의 모든 텍스트 노드를 더해 반환한다.
+// 파라미터가 있으면 선택한 요소의 내부에 주어진 문자열을 텍스트 노드로 만들어 대체한다. 이 경우 기존에 있던 태그는 모두 사라진다.
+// $('#for-text').text();
+// $('#for-text').text('신동엽');
+
+// ## .wrap()
+// 선택한 요소를 주어진 태그로 각각 감싼다. .append()나 .prepend()와 반대로 부모를 추가하는 메서드.
+// $( ".inner" ).wrap( "<div class='new'></div>" );
+
+// ## .wrapAll()
+// 선택한 요소를 주어진 태그로 감싼다. .wrap()과 차이점은 선택한 요소가 여러개일 때 모두 묶어서 하나의 부모만 추가한다는 것이다.
+// $( ".inner" ).wrapAll( "<div class='new' />");
+
+// ## .wrapInner()
+// 선택한 요소의 모든 자식을 주어진 태그로 감싼다.
+// $( ".inner" ).wrapInner( "<div class='new'></div>");
+
+// ## .unwrap()
+// 선택한 요소를 감싸고 있는 태그, 즉 부모를 삭제한다.
+// $('form').unwrap();
+
 </script>
 </head>
 <body>
@@ -72,6 +102,13 @@ manipulation: https://api.jquery.com/category/manipulation/
 			</fieldset>
 		</form>		
 	</section> <br>
+	
+	<section id="for-text">
+		안녕
+		<div id="hello">하시
+			<div id="hi">렵니까?</div>
+		</div>
+	</section>
 	
 	<section>
 		<fieldset>
