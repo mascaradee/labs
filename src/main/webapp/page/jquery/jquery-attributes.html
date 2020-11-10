@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>jQuery: attributes</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<style>
+h3 {
+  margin: 0;
+}
+section {
+	border: 1px solid black;
+}
+section div, section span, section p {
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #EEEEEE;
+}
+.affected {
+	border: 3px solid red;
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+attributes: https://api.jquery.com/category/attributes/
+*/
+
+// # attributes
+
+// ## .attr()
+// 파라미터가 없을땐 특정 속성의 값을 가져온다. 파라미터가 있으면 특정 속성의 값을 주어진 값으로 변경한다.
+// $('#me').attr('data-howareyou')
+// $('#me').attr('data-howareyou', 'fine-thank-you');
+
+// ## .removeAttr()
+// 선택한 요소의 특정 속성을 제거한다. .attr()은 속성을 제거하지 못하기 때문에 해당 경우 이 메서드를 사용해야 한다.
+// $('input:disabled').removeAttr('disabled');
+
+// ## .prop()
+// 파라미터가 없을땐 특정 프로퍼티의 값을 가져온다. 파라미터가 있으면 특정 프로퍼티의 값을 주어진 값으로 변경한다.
+// $('input:disabled').prop('disabled'); // true
+// $('input:disabled').prop('disabled', false);
+
+// ## .removeProp()
+// 선택한 요소의 특정 프로퍼티를 제거한다.
+
+// ## .val()
+// 선택한 요소의 값을 가져오거나  설정한다.
+
+</script>
+</head>
+<body>
+<div class="align-center abc" id="grandgrandfather"> 
+	<h1>jQuery: attributes</h1>
+	<hr>
+	
+	<div class="abc" id="grandfather">
+		<div id="father">
+			<article id="me" data-howareyou="fine-thankyouandrew?"></article>
+		</div>
+	</div>
+	
+	<div id="imNext"><button onclick="fn1()">asdfqwe</button></div>
+	<section style="position: relative;">
+		<form>
+			<fieldset>
+				<input type="text" disabled>
+				<input type="text" value="123">
+				<input type="button">
+				<input type="reset" value="리셋1">
+				<button type="reset">리셋2</button>
+				<textarea></textarea>
+			</fieldset>
+		</form>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<input type="text">
+			<input type="checkbox">1 <br>
+			<input type="radio"> 2 <br>
+		</fieldset>		
+	</section> <br>
+	
+	<section>
+		<fieldset>
+			<select>
+				<option>1</option>
+				<option selected>2</option>
+			</select>
+			<select>
+				<option>1</option>
+				<option>2</option>
+			</select>
+		</fieldset>		
+	</section> <br>
+</div>
+</body>
+</html>

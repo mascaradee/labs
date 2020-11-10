@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>jQuery: css</title>
+<title>jQuery: manipulation</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="/static/css/style.css"/>
 <style>
@@ -59,6 +59,12 @@ manipulation: https://api.jquery.com/category/manipulation/
 // 파라미터가 있으면 선택한 요소의 내부에 주어진 문자열을 텍스트 노드로 만들어 대체한다. 이 경우 기존에 있던 태그는 모두 사라진다.
 // $('#for-text').text();
 // $('#for-text').text('신동엽');
+
+// ## .html()
+// 파라미터 없이 쓰일 경우 선택한 요소 하위의 모든 요소를 HTML 형식의 텍스트로 반환한다.
+// 파라미터가 있으면 선택한 요소의 내부를 주어진 HTML로 대체한다.
+// $('section').eq(0).html();
+// $('section').eq(0).html('<p>헬로워얼드</p>');
 
 // ## .wrap()
 // 선택한 요소를 주어진 태그로 각각 감싼다. .append()나 .prepend()와 반대로 부모를 추가하는 메서드.

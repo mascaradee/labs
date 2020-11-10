@@ -42,6 +42,8 @@
 				<li><a href="/page/jquery/jquery-traversing.html">jquery-traversing</a></li>
 				<li><a href="/page/jquery/jquery-css.html">jquery-css</a></li>
 				<li><a href="/page/jquery/jquery-manipulation.html">jquery-manipulation</a></li>
+				<li><a href="/page/jquery/jquery-attributes.html">jquery-attributes</a></li>
+				<li><a href="/page/jquery/jquery-data.html">jquery-data</a></li>
 			</ul>
 			<h4>HTML</h4>
 			<ul>
