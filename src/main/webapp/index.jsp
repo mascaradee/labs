@@ -49,6 +49,11 @@
 			<ul>
 				<li><a href="/page/html/html-references.html">html-references</a></li>
 			</ul>
+			<h4>Bootstrap</h4>
+			<ul>
+				<li><a href="/page/bootstrap-template.html">bootstrap-template</a></li>
+			</ul>
+			
 		</li>
 	</ul>
 </div>
