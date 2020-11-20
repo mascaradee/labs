@@ -44,6 +44,7 @@
 				<li><a href="/page/jquery/jquery-manipulation.html">jquery-manipulation</a></li>
 				<li><a href="/page/jquery/jquery-attributes.html">jquery-attributes</a></li>
 				<li><a href="/page/jquery/jquery-data.html">jquery-data</a></li>
+				<li><a href="/page/jquery/jquery-forms.html">jquery-forms</a></li>
 			</ul>
 			<h4>HTML</h4>
 			<ul>
@@ -51,7 +52,8 @@
 			</ul>
 			<h4>Bootstrap</h4>
 			<ul>
-				<li><a href="/page/bootstrap-template.html">bootstrap-template</a></li>
+				<li><a href="/page/bootstrap/bootstrap-template.html">bootstrap template</a></li>
+				<li><a href="/page/bootstrap/bootstrap-form-validation.html">bootstrap example: form validation</a></li>
 			</ul>
 			
 		</li>
