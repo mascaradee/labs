@@ -33,13 +33,13 @@ forms: https://api.jquery.com/category/forms/
 
 // # forms
 
-// ## .blur()
-// 파라미터가 없으면 blur 이벤트를 발생시킨다. 파라미터가 있으면 blur 이벤트에 작동할 핸들러를 설정한다.
-
 // $(document).ready(function() {
 // 	...
 // }); // 아래와 같음
 $(function() {
+	
+	// ## .blur()
+	// 파라미터가 없으면 blur 이벤트를 발생시킨다. 파라미터가 있으면 blur 이벤트에 작동할 핸들러를 설정한다.
 	$('#firstName').on('keyup', function(event) {
 		var $target = $(this);
 		var val = $target.val();
@@ -52,8 +52,68 @@ $(function() {
 		var $target = $(this);
 		console.log('뿌얘졌네요');
 	});
+	
+	// ### 리스너: 이벤트가 발생하는지 감시하는 역할, 핸들러: 이벤트가 발생했을 때 실행할 함수
+	
+	// ## .change()
+	// 파라미터가 없으면 change 이벤트를 발생시킨다. 파라미터가 있으면 change 이벤트에 작동할 핸들러를 설정한다.
+	function fn2(event) {
+		var $target = $(this);
+		var value = $target.val();
+		$target.val(value.replace(/[^A-Za-z0-9]/gi, '뿅'));
+	}
+	// $('#lastName').on('change', fn2); // 아래와 같음
+	$('#lastName').change(fn2).change();
+	
+	// $('#lastName').trigger('change'); // 아래와 같음.
+// 	$('#lastName').change();
+	
+	// ## .submit(), .focusin(), .focusout()도 위의 .blur() 대동소이함.
+	
+	// ## .select()도 거의 같으나, 여기서 select 이벤트는 input이나 textarea에서 텍스트를 드래그했을 때 발생하는 이벤트를 말한다.
+	$('#lastName').select(function() { 
+		console.log('hi. you got me'); 
+	});
+	
+	// ## jQuery.param()
+	// 배열이나 자바스크립트 객체, 제이쿼리 객체를 직렬화된 표현(URL의 쿼리스트링)의 문자열로 바꾼다.
+	var myObject = {
+		a : {
+			one : 1,
+			two : 2,
+			three : 3
+		},
+		b : [ 1, 2, 3 ]
+	};
+	window.recursiveEncoded = $.param(myObject); // a%5Bone%5D=1&a%5Btwo%5D=2&a%5Bthree%5D=3&b%5B%5D=1&b%5B%5D=2&b%5B%5D=3
+	window.recursiveDecoded = decodeURIComponent($.param(myObject)); // a[one]=1&a[two]=2&a[three]=3&b[]=1&b[]=2&b[]=3
+	
+	// ## .serialize()
+	// 지정된 form 하위의 입력란들을 submission을 위한 인코딩된 문자열로 변환한다. 입력란에 해당하는 태그에 name 속성이 없을 경우 대상에서 제외한다. 
+	decodeURIComponent($('#myform').serialize()); // firstName=이뿅뿅&lastName=뿅1뿅2뿅3뿅4&username=존예민보스&email=noritersand@daum.net&address=서울 노원 어딘가&country=United States&state=California&same-address=on&paymentMethod=on
+	
+	// ## .serializeArray()
+	// 지정된 form 하위의 입력란들을 name과 value가 property인 객체들의 배열로 변환한다.
+	$('#myForm').serializeArray();
+	/*
+	(9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+	0: {name: "firstName", value: "이뿅뿅"}
+	1: {name: "lastName", value: "뿅1뿅2뿅3뿅4"}
+	2: {name: "username", value: "존예민보스"}
+	3: {name: "email", value: "noritersand@daum.net"}
+	4: {name: "address", value: "서울 노원 어딘가"}
+	5: {name: "country", value: "United States"}
+	6: {name: "state", value: "California"}
+	7: {name: "same-address", value: "on"}
+	8: {name: "paymentMethod", value: "on"}
+	length: 9
+	__proto__: Array(0)
+	*/
+	
+	// ### 같은 form을 대상으로 .serialize()를 사용한 결과와 .serializeArray() + jQuery.param()을 사용한 결과는 같다.
+	// $('#myForm').serialize() === $.param($('#myForm').serializeArray()); // true
+	
 });
-
 </script>
 </head>
 <body class="bg-light">
@@ -115,17 +175,17 @@ $(function() {
 			</div>
 			<div class="col-md-8 order-md-1">
 				<h4 class="mb-3">Billing address</h4>
-				<form class="needs-validation" novalidate>
+				<form class="needs-validation" novalidate id="myForm">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="firstName">First name</label> 
-							<input type="text" class="form-control" id="firstName" placeholder="" value="">
+							<input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="이뿅뿅">
 							<div class="invalid-feedback">Valid first name is .
 							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="lastName">Last name</label> <input type="text"
-								class="form-control" id="lastName" placeholder="" value=""
+								class="form-control" id="lastName" name="lastName" placeholder="" value="ㅂ1ㅈ2ㄷ3ㄱ4"
 								>
 							<div class="invalid-feedback">Valid last name is .
 							</div>
@@ -138,25 +198,20 @@ $(function() {
 							<div class="input-group-prepend">
 								<span class="input-group-text">@</span>
 							</div>
-							<input type="text" class="form-control" id="username"
-								placeholder="Username" >
-							<div class="invalid-feedback" style="width: 100%;">Your
-								username is .</div>
+							<input type="text" class="form-control" id="username" name="username" placeholder="Username" value="존예민보스" >
+							<div class="invalid-feedback" style="width: 100%;">Your username is .</div>
 						</div>
 					</div>
 
 					<div class="mb-3">
 						<label for="email">Email <span class="text-muted">(Optional)</span></label>
-						<input type="email" class="form-control" id="email"
-							placeholder="you@example.com">
+						<input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="noritersand@daum.net">
 						<div class="invalid-feedback">Please enter a valid email
 							address for shipping updates.</div>
 					</div>
 
 					<div class="mb-3">
-						<label for="address">Address</label> <input type="text"
-							class="form-control" id="address" placeholder="1234 Main St"
-							>
+						<label for="address">Address</label> <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" value="서울 노원 어딘가">
 						<div class="invalid-feedback">Please enter your shipping
 							address.</div>
 					</div>
@@ -170,18 +225,18 @@ $(function() {
 					<div class="row">
 						<div class="col-md-5 mb-3">
 							<label for="country">Country</label> <select
-								class="custom-select d-block w-100" id="country" >
+								class="custom-select d-block w-100" id="country" name="country" >
 								<option value="">Choose...</option>
-								<option>United States</option>
+								<option selected>United States</option>
 							</select>
 							<div class="invalid-feedback">Please select a valid
 								country.</div>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="state">State</label> <select
-								class="custom-select d-block w-100" id="state" >
+								class="custom-select d-block w-100" id="state" name="state" >
 								<option value="">Choose...</option>
-								<option>California</option>
+								<option selected>California</option>
 							</select>
 							<div class="invalid-feedback">Please provide a valid state.
 							</div>
@@ -194,13 +249,12 @@ $(function() {
 					</div>
 					<hr class="mb-4">
 					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input"
-							id="same-address"> <label class="custom-control-label"
+						<input type="checkbox" checked class="custom-control-input" id="same-address" name="same-address"> <label class="custom-control-label"
 							for="same-address">Shipping address is the same as my
 							billing address</label>
 					</div>
 					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="save-info">
+						<input type="checkbox" class="custom-control-input" id="save-info" name="save-info">
 						<label class="custom-control-label" for="save-info">Save
 							this information for next time</label>
 					</div>
