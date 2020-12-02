@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>jQuery: events</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/css/bootstrap/bootstrap.css" type="text/css"/>
+<style>
+h3 {
+  margin: 0;
+}
+section {
+	border: 1px solid black;
+}
+section div, section span, section p {
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #EEEEEE;
+}
+.affected {
+	border: 3px solid red;
+}
+</style>
+<style>
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+</style>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script src="/static/js/bootstrap/bootstrap.bundle.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+events: https://api.jquery.com/category/events/
+*/
+
+// # events
+
+$(function() {
+	
+	// ## .bind()
+	// 이벤트 핸들러를 할당하는 메서드
+	// 3.x 버전부터 deprecated 상태임.
+	function fn1() {
+		console.log('What did you call me?');
+	}
+	// $('#country').click(fn1); // 얘는
+	$('#country').bind('click', fn1);
+	// 끗
+	
+	// ## .off()
+	// 이벤트 핸들러를 제거하는 메서드
+// 	$('#country').off(); // id="country"의 모든 이벤트 핸들러 삭제
+// 	$('#country').off('click'); // id="country"의 'click' 이벤트 핸들러 삭제
+	
+	// ## .one()
+	// 한 번 실행하면 사라지는 이벤트 핸들러를 할당한다.
+// 	$('#country').one('click', fn1);
+	
+	// ## .on()
+	// 이벤트 핸들러를 할당하는 메서드... 의 확장판
+	// ### 활용법#1 .bind()처럼 사용하기
+	$('#state').on('change', function() {
+		console.log('뭐신가 바껴부렀구마잉');
+	});
+	// ### 활용법#2 버블링을 이용한 동적으로 생성된 태그 핸들링 하기
+	// 아래처럼 이미 만들어져 있는 태그에 이벤트 핸들러를 할당할 경우
+	var n = 0;
+	function fn2() {
+		console.log(n++ + ': 안녕하세요. 체크박스에오.');
+	}
+// 	$('input:checkbox').on('click', fn2);
+	// 나중에 추가된 태그는 핸들러를 따로 할당해야 제대로 작동한다.
+	$('#appendCheckBoxBtn').click(function() {
+		$('<input type="checkbox">').appendTo('#appendAfterMe');
+// 		$('<input type="checkbox">').click(fn2);
+	});
+	// 하지만 버블링 방식의 .on()을 활용하면 간단히 해결된다.
+	
+	$('#myForm').on('click', 'input:checkbox', fn2);
+	
+	// ## .on()으로 이벤트를 할당하는 또 다른 방법들
+	
+	// ### 공백으로 구분된 문자열
+	$('#address').on('click mouseover keydown', function() {
+		console.log(n++ + ': 안녕하신가! 만일 내게 묻는다면 나는 주소창.');
+	});
+	
+	// #### + 버블링
+// 	$('#myForm').on('click mouseover keydown', '#address', function(){});
+	
+	// ### Object
+	function fn3() {
+		console.log(n++ + ': 이제 콘솔은 지겨워');
+	}
+	$('#address2').on({
+		click: fn3,
+		mouseover: fn3
+	});
+	
+	// #### + 버블링
+	$('#myForm').on({
+		click: fn3,
+		mouseover: fn3
+	}, '#address');
+	
+	// ### 네임스페이스
+	// 특정 이벤트에 여러 핸들러를 부착할 때, 네임스페이스를 이용해서 각각의 핸들러에 이름을 지정하고 나중에 지울 때 활용할 수 있다.
+	$('#zip').on('click.qwer', function() {
+		console.log(n++ + ': 응애에요');
+	});
+	$('#zip').on('click.asd', function() {
+		console.log(n++ + ': 아 들이대');
+	});
+	// 여기서 모종의 이유로 첫 번째 핸들러를 지우고 싶다면?
+	$('#zip').off('click.qwer');
+	
+	// 네임스페이스는 Object 
+	$('#email').on({
+		'click.qwer': function() { console.log(1); },
+		'click.asdf': function() { console.log(2); }
+	});
+	
+});
+</script>
+</head>
+<body class="bg-light">
+	<div class="container">
+		<div class="py-5 text-center">
+			<h2>Checkout form</h2>
+			<p class="lead">Below is an example form built entirely with
+				Bootstrap’s form controls. Each required form group has a validation
+				state that can be triggered by attempting to submit the form without
+				completing it.</p>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 order-md-2 mb-4">
+				<h4 class="d-flex justify-content-between align-items-center mb-3">
+					<span class="text-muted">Your cart</span> <span
+						class="badge badge-secondary badge-pill">3</span>
+				</h4>
+				<ul class="list-group mb-3">
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed">
+						<div>
+							<h6 class="my-0">Product name</h6>
+							<small class="text-muted">Brief description</small>
+						</div> <span class="text-muted">$12</span>
+					</li>
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed">
+						<div>
+							<h6 class="my-0">Second product</h6>
+							<small class="text-muted">Brief description</small>
+						</div> <span class="text-muted">$8</span>
+					</li>
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed">
+						<div>
+							<h6 class="my-0">Third item</h6>
+							<small class="text-muted">Brief description</small>
+						</div> <span class="text-muted">$5</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between bg-light">
+						<div class="text-success">
+							<h6 class="my-0">Promo code</h6>
+							<small>EXAMPLECODE</small>
+						</div> <span class="text-success">-$5</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between"><span>Total
+							(USD)</span> <strong>$20</strong></li>
+				</ul>
+
+				<form class="card p-2">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Promo code">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-secondary">Redeem</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-8 order-md-1">
+				<h4 class="mb-3">Billing address</h4>
+				<form class="needs-validation" novalidate id="myForm">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="firstName">First name</label> 
+							<input type="text" class="form-control" name="firstName" id="firstName" placeholder="" value="이뿅뿅">
+							<div class="invalid-feedback">Valid first name is .
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="lastName">Last name</label> <input type="text"
+								class="form-control" id="lastName" name="lastName" placeholder="" value="ㅂ1ㅈ2ㄷ3ㄱ4"
+								>
+							<div class="invalid-feedback">Valid last name is .
+							</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="username">Username</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">@</span>
+							</div>
+							<input type="text" class="form-control" id="username" name="username" placeholder="Username" value="존예민보스" >
+							<div class="invalid-feedback" style="width: 100%;">Your username is .</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="email">Email <span class="text-muted">(Optional)</span></label>
+						<input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="noritersand@daum.net">
+						<div class="invalid-feedback">Please enter a valid email
+							address for shipping updates.</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="address">Address</label> <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" value="서울 노원 어딘가">
+						<div class="invalid-feedback">Please enter your shipping
+							address.</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+						<input type="text" class="form-control" id="address2"
+							placeholder="Apartment or suite">
+					</div>
+
+					<div class="row">
+						<div class="col-md-5 mb-3">
+							<label for="country">Country</label> <select
+								class="custom-select d-block w-100" id="country" name="country" >
+								<option value="">Choose...</option>
+								<option selected>United States</option>
+							</select>
+							<div class="invalid-feedback">Please select a valid
+								country.</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="state">State</label> <select
+								class="custom-select d-block w-100" id="state" name="state" >
+								<option value="">Choose...</option>
+								<option selected>California</option>
+							</select>
+							<div class="invalid-feedback">Please provide a valid state.
+							</div>
+						</div>
+						<div class="col-md-3 mb-3">
+							<label for="zip">Zip</label> <input type="text"
+								class="form-control" id="zip" placeholder="" >
+							<div class="invalid-feedback">Zip code .</div>
+						</div>
+					</div>
+					<hr class="mb-4">
+					<div class="custom-control custom-checkbox">
+						<div class="input-group-append">
+							<button type="button" class="btn btn-secondary" id="appendCheckBoxBtn">체크 박스 추가</button>
+						</div>
+						<input type="checkbox" checked class="custom-control-input" id="same-address" name="same-address"> <label class="custom-control-label"
+							for="same-address">Shipping address is the same as my
+							billing address</label>
+					</div>
+					<div class="custom-control custom-checkbox" id="appendAfterMe">
+						<input type="checkbox" class="custom-control-input" id="save-info" name="save-info">
+						<label class="custom-control-label" for="save-info">Save
+							this information for next time</label>
+					</div>
+					<hr class="mb-4">
+
+					<h4 class="mb-3">Payment</h4>
+
+					<div class="d-block my-3">
+						<div class="custom-control custom-radio">
+							<input id="credit" name="paymentMethod" type="radio"
+								class="custom-control-input" checked > <label
+								class="custom-control-label" for="credit">Credit card</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input id="debit" name="paymentMethod" type="radio"
+								class="custom-control-input" > <label
+								class="custom-control-label" for="debit">Debit card</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input id="paypal" name="paymentMethod" type="radio"
+								class="custom-control-input" > <label
+								class="custom-control-label" for="paypal">PayPal</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="cc-name">Name on card</label> <input type="text"
+								class="form-control" id="cc-name" placeholder="" >
+							<small class="text-muted">Full name as displayed on card</small>
+							<div class="invalid-feedback">Name on card is </div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="cc-number">Credit card number</label> <input
+								type="text" class="form-control" id="cc-number" placeholder=""
+								>
+							<div class="invalid-feedback">Credit card number is
+								</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 mb-3">
+							<label for="cc-expiration">Expiration</label> <input type="text"
+								class="form-control" id="cc-expiration" placeholder="" >
+							<div class="invalid-feedback">Expiration date </div>
+						</div>
+						<div class="col-md-3 mb-3">
+							<label for="cc-cvv">CVV</label> <input type="text"
+								class="form-control" id="cc-cvv" placeholder="" >
+							<div class="invalid-feedback">Security code required</div>
+						</div>
+					</div>
+					<hr class="mb-4">
+					<button class="btn btn-primary btn-lg btn-block" type="button">Continue
+						to checkout</button>
+				</form>
+			</div>
+		</div>
+
+		<footer class="my-5 pt-5 text-muted text-center text-small">
+			<p class="mb-1">&copy; 2017-2020 Company Name</p>
+			<ul class="list-inline">
+				<li class="list-inline-item"><a href="#">Privacy</a></li>
+				<li class="list-inline-item"><a href="#">Terms</a></li>
+				<li class="list-inline-item"><a href="#">Support</a></li>
+			</ul>
+		</footer>
+	</div>
+</body>
+</html>

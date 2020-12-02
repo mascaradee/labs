@@ -45,6 +45,7 @@
 				<li><a href="/page/jquery/jquery-attributes.html">jquery-attributes</a></li>
 				<li><a href="/page/jquery/jquery-data.html">jquery-data</a></li>
 				<li><a href="/page/jquery/jquery-forms.html">jquery-forms</a></li>
+				<li><a href="/page/jquery/jquery-events.html">jquery-events</a></li>
 			</ul>
 			<h4>HTML</h4>
 			<ul>
