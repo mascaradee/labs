@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class TestController {
-	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+public class SpringTestController {
+	private static final Logger logger = LoggerFactory.getLogger(SpringTestController.class);
 
 	@GetMapping(path = "/test/get.do")
 	public ModelAndView get(ModelAndView mv) {

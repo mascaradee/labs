@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery: ajax</title>
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script>
+/*
+jQuery 공식 도움말: https://api.jquery.com
+forms: https://api.jquery.com/category/ajax/
+*/
+
+// # ajax
+
+// ## pure javascript로 AJAX를 구현하는 방법
+/*
+function loadDoc() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			document.getElementById('demo').innerHTML = xhr.responseText;
+		}
+	};
+	xhr.open('GET', 'test2.html');
+	xhr.send();
+}
+*/
+
+// $(document).ready(function() {
+// 	...
+// }); // 아래와 같음
+	
+// ## jQuery.get()
+// HTTP get 방식으로 데이터를 서버에서 받아오는 메서드.
+
+// ### 첫 번째 사용방법: 간단 웨이
+$(function() {
+	getSimpleString();
+	getSimpleJSON();
+});
+function getSimpleString() {
+	$.get('/ajaxtest/getSimpleString.do', function(resp) {
+		console.log(resp);
+	}, 'text'); // 'text' 부분은 dataType을 명시하는 위치이며, 생략할 경우 response의 MIME type에 의존하여 jQuery가 알아서 처리한다.
+}
+function getSimpleJSON() {
+	// $.get('/ajaxtest/getSimpleJSON.do', 'a=1&b=2', function(resp) {
+	$.get('/ajaxtest/getSimpleJSON.do', { name: 'John', time: '2pm' }, function(resp) {
+		console.log(resp);
+	});
+}
+function getLittleTinyHtml() {
+	$.get('/ajaxtest/getLittleTinyHtml.do', function(resp) {
+		console.log(resp);
+		$('#result').html(resp);
+	});
+}
+// ### 두 번째 사용방법: 파라미터를 객체로
+function getSimpleString2() {
+	var settings = {
+		url: '/ajaxtest/getSimpleString.do',
+		success: function(resp) {
+			console.log(resp);
+		}
+	};
+	$.get(settings);
+}
+function getSimpleJSON2() {
+	$.get({
+		url: '/ajaxtest/getSimpleJSON.do',
+		data: 'a=1&b=2',
+		success: function(resp) {
+			console.log(resp);
+		}
+	});
+}
+function getLittleTinyHtml2() {
+	$.get({
+		url: '/ajaxtest/getLittleTinyHtml.do',
+		success: function(resp) {
+			console.log(resp);
+			$('#result').html(resp);
+		}
+	});
+}
+
+// ## jQuery.post()
+// 기본적인 사용방법은 jQuery.get()과 거의 같으나, data 부분은 querystring이 아니라 formdata로 전송된다.
+function getSimpleJSONWithPost() {
+	// $.post('/ajaxtest/getSimpleJSONWithPost.do', 'a=1&b=2', function(resp) {
+	// 	console.log(resp);
+	// });
+	$.post({
+		url: '/ajaxtest/getSimpleJSONWithPost.do',
+		// data: 'a=1&c=3',
+		data: { name: 'John', time: '2pm' },
+		dataType: 'json',
+		// dataType은 모든 ajax API에 있는 옵션으로 응답 받은 데이터를 어떤 데이터 타입으로 파싱 혹은 핸들링 할 것인지를 의미한다. (xml/json/script/text/html)
+		success: function(resp) {
+			console.log(resp);
+		}
+	});
+}
+
+// ## jQuery.ajax()
+// jQuery AJAX API의 가장 핵심인 메서드.
+function getSimpleString3() {
+	$.ajax({
+		url: '/ajaxtest/getSimpleString.do',
+		method: 'get',
+		data: 'a=1&b=2',
+		success: function(resp) {
+			console.log(resp);
+		}
+	});
+}
+function getSimpleJSONWithPost2() {
+	$.ajax({
+		url: '/ajaxtest/getSimpleJSONWithPost.do',
+		method: 'post',
+		data: { name: 'John', time: '2pm' },
+		success: function(resp) {
+			console.log(resp);
+		}
+	});
+}
+// 쓰면 안되는 예시#1
+function getSimpleStringSync() {
+	$.ajax({
+		url: '/ajaxtest/getSimpleString.do',
+		method: 'get',
+		async: false, // <-- 얘를 false로 하면 이 통신이 끝나기 전까지 스크립트와 화면 작동이 멈추게 됨.
+		success: function(resp) {
+			let max = 5000000000;
+			for (let i = 0; i < max; i++) {}
+			console.log(resp);
+		}
+	});
+}
+// getSimpleStringSync();
+
+function getSome() {
+	$.ajax({
+		url: '/ajaxtest/getSimpleString.do',
+		method: 'get', // type이라는 설정이 있으며 기능은 완전히 같다.
+		async: true, // 생략할 경우 true
+		beforeSend: function(jqXHR, settings) { // 통신을 보내기 전 실행함.
+			console.log('before send');
+			// console.log(jqXHR); // XHR를 jQuery가 가공한 jqXHR 객체
+			console.log('jqXHR.status:', jqXHR.status);
+			console.log('jqXHR.statusText:', jqXHR.statusText);
+			console.log('jqXHR.readyState:', jqXHR.readyState);
+			console.log('settings:', settings); // $.ajax()를 호출할 때 넘긴 settings 객체
+		},
+		cache: true, // false로 하면 캐시를 무시한다.
+		complete: function(jqXHR, textStatus) { // 통신 후 무조건 실행함.
+			console.log('complete'); 
+			console.log('jqXHR:', jqXHR);
+			console.log('textStatus:', textStatus);
+		},
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // request의 MIME type과 charset 설정. dataType의 반대격
+		data: 'd=4&b=2',
+		dataType: 'text',
+		global: false, // default: true, 전역 AJAX 이벤트 핸들러를 트리거할 지 말지를 결정하는 설정.
+		headers: { // HTTP Request 헤더를 설정하는 설정.
+			abc: 'abcd',
+			qwer: 'asdf',
+			'X-Requested-With': 'got-you-beach'
+		},
+		statusCode: {
+			200: function() { console.log('유후!'); }
+		},
+		success: function(resp) { // 통신 후 결과가 성공이면 실행함.
+			// let max = 5000000000;
+			// for (let i = 0; i < max; i++) {}
+			console.log('success'); 
+			console.log('resp:', resp);
+		},
+		error: function(jqXHR, textStatus, errorThrown) { // 통신 후 결과가 실패면 실행함.
+			console.log('fail');
+			console.log('jqXHR:', jqXHR);
+			console.log('textStatus:', textStatus);
+			console.log('errorThrown:', errorThrown);
+		}
+	});
+}
+
+// ## 전역 AJAX 이벤트 핸들러
+// ### .ajaxComplete()
+// 통신이 끝났을 때 실행하는 전역 핸들러 등록
+$(document).ajaxComplete(function(event, jqXHR, ajaxOptions) {
+	console.log("%cglobal ajax event handler: complete", "color: black; font-weight: bold; background-color: #eee; padding: 2px;");
+});
+// ### .ajaxStop()
+// 통신이 끝났을 때 실행하는 전역 핸들러 등록. .ajaxComplete()는 각각의 ajax 통신이 끝날 때마다 실행되나, 
+// .ajaxStop()은 아직 작동중인 ajax가 있으면 기다렸다가 모두 종료되었을 때 실행한다.
+$(document).ajaxStop(function(event, jqXHR, ajaxOptions) {
+	console.log("%cglobal ajax event handler: stop", "color: black; font-weight: bold; background-color: #eee; padding: 2px;");
+});
+
+// 이외에 아래의 메서드들이 있다.
+// .ajaxError(): 통신이 실패했을때 실행하는 전역 핸들러 등록
+// .ajaxSend(): 통신을 시작하기 전에 실행하는 전역 핸들러 등록
+// .ajaxStart(): 통신을 시작한 후에 실행하는 전역 핸들러 등록
+// .ajaxSuccess(): 통신이 성공했을 때 실행하는 전역 핸들러 등록
+</script>
+</head>
+<body>
+<div class="align-center">
+	<h1>jQuery: ajax</h1>
+	<hr>
+	<p>jQuery.get()</p>
+	<button type="button" onclick="getSimpleString()">getSimpleString()</button><br>
+	<button type="button" onclick="getSimpleJSON()">getSimpleJSON()</button><br>
+	<button type="button" onclick="getLittleTinyHtml()">getLittleTinyHtml()</button><br>
+	<br>
+	<button type="button" onclick="getSimpleString2()">getSimpleString2()</button><br>
+	<button type="button" onclick="getSimpleJSON2()">getSimpleJSON2()</button><br>
+	<button type="button" onclick="getLittleTinyHtml2()">getLittleTinyHtml2()</button><br>
+	<br>
+	<p>jQuery.post()</p>
+	<button type="button" onclick="getSimpleJSONWithPost()">getSimpleJSONWithPost()</button><br>
+	<br>
+	<p>jQuery.ajax()</p>
+	<button type="button" onclick="getSimpleString3()">getSimpleString3()</button><br>
+	<button type="button" onclick="getSimpleJSONWithPost2()">getSimpleJSONWithPost2()</button><br>
+	<button type="button" onclick="getSome()">getSome()</button><br>
+	<br>
+	<hr>
+	<h4>result</h4>
+	<div id="result"></div>
+</div>
+</body>
+</html>

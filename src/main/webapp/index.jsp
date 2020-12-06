@@ -46,6 +46,7 @@
 				<li><a href="/page/jquery/jquery-data.html">jquery-data</a></li>
 				<li><a href="/page/jquery/jquery-forms.html">jquery-forms</a></li>
 				<li><a href="/page/jquery/jquery-events.html">jquery-events</a></li>
+				<li><a href="/page/jquery/jquery-ajax.html">jquery-ajax</a></li>
 			</ul>
 			<h4>HTML</h4>
 			<ul>
