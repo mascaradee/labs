@@ -204,6 +204,43 @@ $(document).ajaxStop(function(event, jqXHR, ajaxOptions) {
 // .ajaxSend(): 통신을 시작하기 전에 실행하는 전역 핸들러 등록
 // .ajaxStart(): 통신을 시작한 후에 실행하는 전역 핸들러 등록
 // .ajaxSuccess(): 통신이 성공했을 때 실행하는 전역 핸들러 등록
+
+// ## jQuery XHR 객체의 반환을 이용한 메서드 체이닝
+
+function methodChaning() {
+	// $.ajax()의 shorthand 버전인 $.get() $.post() 등도 jqXHR을 반환한다.
+	// jqXHR.done(fn): 통신 성공 시 실행
+	// jqXHR.fail(fn): 통신 실패 시 실행
+	// jqXHR.always(fn): 통신 후 성공/실패 여부 관계없이 실행. 성공했을 때와 실패했을 때의 실제 전달인자가 다르다.
+	// jqXHR.then(fn1, fn2): .done()과 .fail()의 기능을 합친 메서드. always()랑 비슷해보이지만, 이 메서드는 성공과 실패 시 실행할 함수를 각각 별도로 할당해야 한다.
+	$.ajax({
+		url: '/ajaxtest/getSimpleString.do',
+		method: 'get'
+	}).then(function(data, textStatus, jqXHR) {
+		console.log('then { data:', data, '}');
+		console.log('then { textStatus:', textStatus, '}');
+		console.log('then { jqXHR:', jqXHR, '}');
+	}, function(jqXHR, textStatus, errorThrown) {
+		console.log('then2 { jqXHR:', jqXHR, '}');
+		console.log('then2 { textStatus:', textStatus, '}');
+		console.log('then2 { errorThrown:', errorThrown, '}');
+	}).always(function(any, textStatus, any2) {
+		console.log('always { any:', any, '}');
+		console.log('always { textStatus:', textStatus, '}');
+		console.log('always { any2:', any2, '}');
+	}).fail(function(jqXHR, textStatus, errorThrown) {
+		console.log('fail { jqXHR:', jqXHR, '}');
+		console.log('fail { textStatus:', textStatus, '}');
+		console.log('fail { errorThrown:', errorThrown, '}');
+	}).done(function(data, textStatus, jqXHR) {
+		console.log('done { data:', data, '}');
+		console.log('done { textStatus:', textStatus, '}');
+		console.log('done { jqXHR:', jqXHR, '}');
+	});
+
+}
+
+
 </script>
 </head>
 <body>
@@ -226,6 +263,8 @@ $(document).ajaxStop(function(event, jqXHR, ajaxOptions) {
 	<button type="button" onclick="getSimpleString3()">getSimpleString3()</button><br>
 	<button type="button" onclick="getSimpleJSONWithPost2()">getSimpleJSONWithPost2()</button><br>
 	<button type="button" onclick="getSome()">getSome()</button><br>
+	<p>methodChaning</p>
+	<button type="button" onclick="methodChaning()">methodChaning()</button><br>
 	<br>
 	<hr>
 	<h4>result</h4>
