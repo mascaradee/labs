@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+const SETTING = {
+	name: "LUCKY LOTTO!",
+	count: 6,
+	maxNumber:45
+}
+let {maxNumber, count} = SETTING; // destructuring
+let mySet = new Set();
+function getRandomNumber(maxNumber){
+	function getRandomNumber1(){
+		return Math.floor(Math.random() * maxNumber);
+	}
+
+	while (true) {
+	
+		let rn = getRandomNumber1();
+
+		if (!mySet.has(rn)) {
+			mySet.add(rn);
+			break;
+		}
+	}
+
+}
+
+for(let i = 0; i < count; i++){
+	getRandomNumber(maxNumber);
+}
+console.log(mySet);
+
+
+</script>
+
+</body>
+</html>

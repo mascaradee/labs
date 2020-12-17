@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>multiples-of-3-and-5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        /*
+        10미만의 자연수에서 3과 5의 배수를 구하면 3,5,6,9이다. 이들의 총합은 23이다.
+        1000미만의 자연수에서 3,5의 배수의 총합을 구하라.
+        */  
+        
+        /* mine
+        let input = 1000;
+        let three = 3;
+        let five = 5;
+        let r1 = (input - 1) / three
+        let r2 = (input -1) / five
+        let set = new Set();
+        for (let i = 1; i <= r1; i++){
+            set.add(three * i);
+            //console.log(three * i);
+        }      
+        for (let j = 1; j <= r2; j++){
+            set.add(five * j);
+            //console.log(five * j);
+        }
+        console.log('set: ', set);
+        console.log('set: ', set.size);
+        let sum = 0;
+        set.forEach(function(value){
+            sum += value;
+        });
+        console.log('sum: ', sum);
+        */
+
+        // others
+        let max = 1000;
+        let sum = 0;
+        for (let i = 0; i < max; i++) {
+            if (i % 3 == 0 || i % 5 == 0) {
+                sum += i;
+            }
+        }
+        console.log(sum);
+    </script>
+</body>
+</html>

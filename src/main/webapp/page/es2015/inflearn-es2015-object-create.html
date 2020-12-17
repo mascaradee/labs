@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>안녕하세요 DIV입니다.</div>
+	<input type='text' id='mine' value='Destructuring test' />
+	<script type="text/javascript">
+		document.querySelector('input').addEventListener('click', function({type, target}){
+			console.log(target.tagName, type); // INPUT click
+		});
+	</script>
+</body>
+</html>

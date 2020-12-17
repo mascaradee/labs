@@ -1,0 +1,23 @@
+div {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    background: red;
+}
+
+.container {
+    background: yellow;
+    left: 20px;
+    top: 20px;
+    position: relative; /* 원래 있던자리에서 주어진 수치만큼 옮겨간다. */
+}
+
+.box {
+    background: blue;
+    left: 20px;
+    top: 20px;
+    /* position: relative;  원래 있던자리에서 주어진 수치만큼 옮겨간다. */
+    /* position: absolute; 부모 기준으로 주어진 수치만큼 옮겨간다. */
+    /* position: fixed; 브라우저(window) 페이지 기준으로 주어진 수치만큼 옮겨간다. */
+    position: sticky; /* 원래자리에 있는데 스크롤할때 고정됨*/
+}

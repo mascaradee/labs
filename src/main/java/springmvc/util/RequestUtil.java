@@ -65,7 +65,7 @@ public class RequestUtil {
 	 * @author fixalot
 	 * @deprecated 옛날 방식이니 사용 금지
 	 */
-	@Deprecated(since = "??", forRemoval = true)
+	@Deprecated
 	public static String readBodyLegacyway(HttpServletRequest request) {
 		String body = null;
 		StringBuilder stringBuilder = new StringBuilder();

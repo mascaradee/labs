@@ -1,0 +1,105 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Source Sans Pro';
+    background-color: #212121;
+    font-size: 1pt;
+    width: 400px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+.navbar__logo {
+    color: white;
+}
+.navbar__logo i {
+    color: red;
+}
+.navbar__icon {
+    color: white;
+}
+.main__video {
+    width: 400px;
+    background-color:beige;
+}
+.header {
+    color: white;
+    padding: 10px;
+}
+.titlearea__title {
+    display: flex;
+    justify-content: space-between;
+}
+.titlearea__title__text {
+    width: 90%;
+}
+.titlearea__title__icon {
+    width: 5%;
+}
+.titlearea__subscribe {
+    display: flex;
+}
+.titleArea__subscribe__subCount {
+    padding-right: 10px;
+    color: gray;
+}
+.titleArea__subscribe__tags {
+    color: #1de9b6;
+}
+.titlearea__icon {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+.ownerarea {
+    display: flex;
+    justify-content: space-between;
+}
+.ownerarea__ownerpart {
+    /* margin-left: 20px; */
+    display: flex;
+    /* width: 80%; */
+    /* justify-content: space-between; */
+    /* padding-left: 20px; */
+}
+.ownerarea__ownerpart__photo {
+    width: 20px;
+}
+.ownerarea__ownerpart__ownerinfo {
+    padding-left: 10px;
+}
+.ownerarea__subpart {
+    display: flex;
+    align-items: center ;
+    /* width: 20%; */
+    /* padding-right: 20px; */
+}
+.ownerarea__subpart__icon_outline {
+    padding-left: 10px;
+}
+.viewlist {
+    padding: 15px;
+}
+.item {
+    display: flex;
+}
+.item__thumbnail {
+    width: 50%;
+}
+.item__titlearea {
+    width: 50%;
+    height: 100px;
+    color: white;
+}
+.item__titlearea__titlepart {
+    display: flex;
+    height: 50%;
+}

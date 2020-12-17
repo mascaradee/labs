@@ -1,0 +1,18 @@
+div, span {
+    width: 80px;
+    height: 80px;
+    margin: 20px;
+    background: pink;
+}
+
+div {
+    background-color: red;
+    /* display: inline; 한줄표기, 컨텐츠에 따라 크기 변경  */
+    display: inline-block; /*한줄표기하지만 원래 상자 사이즈에 맞춰서  */
+
+}
+
+span {
+    background-color: blue;
+    display: block; /*블록지정, 한줄에 블록하나*/
+}
