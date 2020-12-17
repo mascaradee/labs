@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>page title here</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/css/style.css"/>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script>
+var n = 123;
+var b = true;
+var s = 'hi';
+// 얘네는 모두 원시형 값임. 하지만 메서드가 존재함. 어째서?
+// 원시형 변수의 프로퍼티에 접근하려고 할 때 자바스크립트가 원시형 값을 자동으로 래퍼 클래스로 임시 교체함.
+n.toString(); // new Number(n).toString();
+s.indexOf('i'); // new String(s).indexOf('i');
+
+// 이런 특성 때문에 원시형 변수에 프로퍼티를 새로 추가할 경우, 다시 접근하는건 불가능하다.
+n.length = 3;
+n.length; // undifined
+
+// 와따시냐면 실제 작동은 아래와 같기 때문
+new Number(n).length = 3; // n이 아니라 새로운 Number 타입의 인스턴스에 추가됨
+new Number(n).length; // undifined, 이 또한 새로 만들어진 인스턴스의 length를 찾음
+</script>
+</head>
+<body>
+<div class="align-center">
+	<h1>js wrapper type</h1>
+	<hr>
+	<p>description</p>
+	<p><a href="https://noritersand.github.io/javascript/javascript-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-prototype/">링크</a>
+</div>
+</body>
+</html>
