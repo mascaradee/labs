@@ -20,7 +20,7 @@ lis.forEach((ele, index, obj) => {
         });
         a.classList.toggle('pushed'); // 선택한 아이콘에 파란색 넣기  다시 클릭하면 파란색 해제
     });
-// });
+});
 
 /* jQuery 버전 */
 

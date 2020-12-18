@@ -15,6 +15,8 @@
     <!-- 텍스트: span -->
     <!-- 정렬이나 묶음 : div -->
     <!-- 큰 틀은 haeaer, section 등의 태그를 이용 -->
+    
+    <!-- Header -->
     <header class="head">
         <div class="logos">
             <i class="fas fa-bars a"></i>
@@ -29,9 +31,13 @@
             <img class="idPicture" src='/webapp/static/images/tough-apeach.png'></img>
         </div>
     </header>
+
+    <!-- Video Player -->
     <section class="view">
         <video class='video' controls src="/webapp/static/video/yoon-dance.mp4"></video>
     </section>
+
+    <!-- Video Info -->
     <section class="info">
         <ul class="tags">
             <li>#디자이너</li>
@@ -75,8 +81,36 @@
     
     <section class="upNext">
         <span class="upNext-span">다음 동영상</span>
-        <div class="item">
-            <img src="/webapp/static/images/thumbnail.jpg" alt="" class="thumbnail">
+        <ul>
+            <li class="item">
+                <div class="image"><img src="/webapp/static/images/thumbnail.jpg" alt="" class="image"></div>
+                <div class="info">
+                    <span class="title">발리에서 생긴일(feat. 문구인 뀰, 숭, 아이보리)이렇게 길어지면 어떻게 나오나</span>
+                    <span class="name">MoTV</span>
+                    <span class="views">조회수 1만회, 10개월 전</span>
+                </div>
+            </li>
+            <li class="item">
+                <div class="image"><img src="/webapp/static/images/thumbnail.jpg" alt="" class="image"></div>
+                <div class="info">
+                    <span class="title">발리에서 생긴일(feat. 문구인 뀰, 숭, 아이보리)이렇게 길어지면 어떻게 나오나</span>
+                    <span class="name">MoTV</span>
+                    <span class="views">조회수 1만회, 10개월 전</span>
+                </div>
+            </li>
+            <li class="item">
+                <div class="image"><img src="/webapp/static/images/thumbnail.jpg" alt="" class="image"></div>
+                <div class="info">
+                    <span class="title">발리에서 생긴일(feat. 문구인 뀰, 숭, 아이보리)이렇게 길어지면 어떻게 나오나</span>
+                    <span class="name">MoTV</span>
+                    <span class="views">조회수 1만회, 10개월 전</span>
+                </div>
+            </li>
+        </ul>
+        <!-- <div class="item">
+            <div class="img">
+               <img src="/webapp/static/images/thumbnail.jpg" alt="" class="thumbnail">
+            </div>
             <ul class="title_o">
                 <li class="title">발리에서 생긴일(feat. 문구인 뀰, 숭, 아이보리)이렇게 길어지면 어떻게 나오나</li>
                 <li class="channel">MoTV</li>
@@ -98,7 +132,7 @@
                 <li class="channel">MoTV</li>
                 <li class="subscribe">조회수 1만회, 10개월 전</li>
             </ul>
-        </div>
+        </div> -->
     </section>
 </body>
 </html>

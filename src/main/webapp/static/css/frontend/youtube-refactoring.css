@@ -21,6 +21,10 @@ body {
     font-family: 'Roboto', sans-serif;
     color: var(--text-white);
 }
+ul {
+    list-style: none;
+    padding: 0;
+}
 
 /* head */
 .head {
@@ -51,14 +55,22 @@ body {
 
 /* view */
 .view {
+    /* 비디오를 스크롤에 관계 없이 위에 고정 */
+    position: sticky;
+    top: 0;
+    /* 블록요소나 표의 칸 상자의 가로 정렬을 가운데*/
+    text-align: center;
     background-color: var(--background-black);
-    height: 450px;
+    /* height: 450px;
     display: flex;
     justify-content: center; /* TODO 가운데로 가라 */
-    align-items: center;
+    /* align-items: center; */
 }
 .view .video {
-    width: 400px; 
+    /* 비디로클립을 반응형으로 만드는 방법 */
+    width: 100%; 
+    height: 100%;
+    max-width: 1000px; 
 }
 
 /* info */
@@ -87,16 +99,20 @@ body {
     align-items: center;
 }
 .info .subscribeInfo .icons {
-    list-style: none;
+    /* list-style: none; 최상단에 한번에 정의 해 놓는 것이 좋다 */
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 50%;
 }
 .info .subscribeInfo .icons i {
-    padding-right: 5px;
+    padding-right: calc(var(--padding) / 4); /* 정해진 패딩값을 계산식을 이용해 사용할 수 있다. */
     font-size: var(--font-large-size);
 }
+
+.info .subscribeInfo .icons i.pushed {
+    color:  blue;
+  }
 
 .info .channel {
     display: flex;
@@ -147,7 +163,30 @@ body {
     padding-top: 10px;
 }
 
+/* 다음 동영상 */
 .upNext {
+    padding: var(--padding);
+}
+.upNext .item {
+    display: flex;
+}
+.upNext img {
+    flex: 1%;
+}
+.upNext .image img {
+    width: 100%;
+}
+.upNext .info {
+    flex: 99%;
+    display: flex;
+    flex-direction: column;
+}
+.upNext .info .title {
+    font-size: var(--font-midium-size);
+}
+
+
+/* .upNext {
     padding: 0px 20px;
 }
 .upNext .item {
@@ -174,7 +213,4 @@ body {
     border-top: 0.1px solid var(--text-light-gray);
     padding-bottom: 10px;
 }
-
-.pushed {
-  color:  blue;
-}
+ */
