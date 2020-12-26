@@ -19,12 +19,11 @@ public class PropertiesTest {
 	@Test
 	public void testCharSet() throws IOException{
 		Properties p = new Properties();
-//		p.
 		BufferedReader reader = new BufferedReader(new FileReader("src\\main\\webapp\\WEB-INF\\classes\\bundle\\TestBundle_ko.properties"));
         Properties prop = new Properties();
         prop.load(reader);
         reader.close();
-//        logger.debug("{}", prop);
+        logger.debug("{}", prop);
 
         Assert.assertEquals("{WELCOME=환영합니다., COUNTRY=한국, TITLE=JSTL 공부중}", prop.toString());
 
