@@ -9,7 +9,7 @@
 <body>
     <c:out value="${10 / 2 }"></c:out>
 <%--     <c:out value="${[1,3,5,2].stream().sorted().toList().toString() }"></c:out> --%>
-    <!-- [1,3,5,2].stream().sorted().toList() -->
+    <!--  [1, 2, 3, 5] -->
     <br/>
 </body>
 </html>

@@ -6,8 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -215,7 +219,7 @@ public class StreamTest {
 		iStream.map(n -> n % 2).forEach(e -> logger.debug("compare to map and filter: {}", e)); // 0 1 0 1 0
 	}
 	
-	@Test
+//	@Test
 	public void testStream12() {
 		// flatMap(함수) : 해당 스트림의 요소가 배열일 경우, 배열의 각 요소를 주어진 함수에 인수로 전달하여, 그 반환값으로 이루어진 새로운 스트림을 반환함.
 		String[] arr = {"I missed you", "You need me", "We will be happy"};	 
@@ -223,5 +227,120 @@ public class StreamTest {
 		stream.flatMap(s -> Stream.of(s.split(" +"))).forEach(e -> logger.debug("flatMap: {}", String.valueOf(e))); // 공백이 하나 이상 있으면 split해서 스트림을 만들어라.
 	}
 		
+//	@Test
+	public void testStream13() {
+		// limit(), skip()
+		IntStream stream1 = IntStream.range(0, 10);
+		IntStream stream2 = IntStream.range(0, 10);
+		IntStream stream3 = IntStream.range(0, 10);
+
+		stream2.limit(3).forEach(n -> logger.debug("limit: {}", n));
+		stream1.skip(5).forEach(n -> logger.debug("skip: {}", n));
+		stream3.skip(2).limit(3).forEach(n -> logger.debug("skip & limit: {}", n));
+	}
 	
+//	@Test
+	public void testStream14() {
+		// sorted()
+		IntStream stream1 = IntStream.of(5, 2, 39, 3, 1);
+		Stream<String> stream2 = Stream.of("dog", "cat", "hippo", "chicken");
+		
+		stream1.sorted().forEach(e -> logger.debug("sorted: {}", e));
+		stream2.sorted(Comparator.reverseOrder()).forEach(e -> logger.debug("sorted: {}", e));		
+	}
+//	@Test
+	public void testStream15() {
+		// peek()
+		  IntStream.of(1, 2, 3, 4)
+		  			.peek(e -> logger.debug("원본 value: {}", e))
+		            .filter(e -> e > 2)
+		            .peek(e -> logger.debug("Filtered value: {}", e))
+		            .map(e -> e * e)
+		            .peek(e -> logger.debug("Mapped value: {}", e))
+		            .sum();
+	}
+//	@Test
+	public void testStream16() {
+		// forEach()
+		  IntStream.of(1, 2, 3, 4).forEach(e -> logger.debug("{}", e));
+	}
+//	@Test
+	public void testStream17() {
+		// reduce()
+		Stream<String> stream1 = Stream.of("I", "love", "you");
+		Stream<String> stream2 = Stream.of("I", "hate", "you");
+		
+		Optional<String> result1 = stream1.reduce((s1, s2) -> s1 + " " + s2);
+		result1.ifPresent(logger::debug);  // ifPresent(함수) : 값이 있다면 함수 실행
+		String result2 = stream2.reduce("also", (s1, s2) -> s1 + " " + s2);
+		logger.debug(result2);
+	}
+//	@Test
+	public void testStream18( ) {
+		// findFirst(), findAny()
+		IntStream stream1 = IntStream.of(5, 4, 3, 2, 1);
+		IntStream stream2 = IntStream.of(5, 4, 3, 2, 1);
+		
+		stream1.findFirst().ifPresent(e -> logger.debug("findFirst: {}", e));
+		stream2.findAny().ifPresent(e -> logger.debug("findAny: {}", e));
+		
+		
+		List<String> list = new ArrayList<>();
+		list.add("일");
+		list.add("이");
+		list.add("삼");
+		list.add("사");
+
+		Stream<String> stream3 = list.parallelStream();
+		Stream<String> stream4 = list.parallelStream();
+		
+		stream3.findFirst().ifPresent(e -> logger.debug("findFirst: {}", e));
+		stream4.findAny().ifPresent(e -> logger.debug("findAny: {}", e));		
+	}
+	
+//	@Test
+	public void testStream19() {
+		// anyMatch(), allMatch(), noneMatch()
+		Stream<String> stream1 = Stream.of("A","B","A","C");
+		Stream<String> stream2 = Stream.of("A","A","A","B");
+		Stream<String> stream3 = Stream.of("D","E","F","A");
+		
+		logger.debug("{}", stream1.anyMatch(e -> e == "A") );
+		logger.debug("{}", stream2.allMatch(e -> e == "A") );
+		logger.debug("{}", stream3.noneMatch(e -> e == "A") );
+	}
+	
+//	@Test
+	public void testStream20() {
+		// count(), min(), max()
+		Stream<String> stream1 = Stream.of("a","b","c","d");
+		IntStream stream2 = IntStream.of(1, 2, 3, 4);
+		IntStream stream3 = IntStream.of(1, 2, 3, 4);
+		
+		logger.debug("{}", stream1.count());
+		logger.debug("{}", stream2.max());
+		logger.debug("{}", stream3.min().getAsInt());
+	}
+	
+//	@Test
+	public void testStream21() {
+		// sum(), average()
+		IntStream stream1 = IntStream.of(1, 2, 3, 4);
+		DoubleStream stream2 = DoubleStream.of(1.1, 2.1, 3.1, 4.1);
+		
+		logger.debug("{}", stream1.sum()); // 10
+		logger.debug("{}", stream2.average().getAsDouble()); // OptionalDouble[2.6] /  2.6
+	}
+	
+	
+	@Test
+	public void testStream22() {
+		// collect()
+		Stream<String> stream = Stream.of("일", "이", "삼", "사");
+		List<String> list = stream.collect(Collectors.toList());
+		Iterator<String> i = list.iterator();
+		while (i.hasNext()) {
+			logger.debug("{}", i.next()); // 일 이 삼 사		
+		}
+	}
 }
