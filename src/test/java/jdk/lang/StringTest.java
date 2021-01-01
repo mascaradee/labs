@@ -182,7 +182,7 @@ public class StringTest {
 		Assert.assertFalse(r2);
 	}
 	
-	@Test
+//	@Test
 	public void testReplaceString() {
 		String s = "Hello, Hello, world.";
 	
@@ -204,4 +204,73 @@ public class StringTest {
 		String r6 = s.replaceFirst(" ", "-");
 		Assert.assertEquals("Hello,-Hello, world.", r6);		
 	}
+	
+//	@Test
+	public void testCompareString() {
+		String s = " Happy new year!";
+		Assert.assertEquals(true, s.endsWith("!"));  
+		Assert.assertEquals(true, s.startsWith(" ")); // 공백도 확인할 수 있다.
+		Assert.assertEquals(true, s.startsWith("H", 1)); // 공백도 확인할 수 있다.
+		Assert.assertEquals(false, s.startsWith("New", 7)); // 대소문자도 가림
+		Assert.assertEquals(true, s.startsWith("new", 7)); // 대소문자도 가림
+	}
+	
+//	@Test
+	public void testCompareString1() {
+		String s1 = "H"; // 72
+		String s2 = "h"; // 104
+		
+		Assert.assertEquals(-32, s1.compareTo(s2)); // 72 - 104 = -32 : 기준 문자열(앞)이 더 작아서 음수 출력 
+		Assert.assertEquals(32, s2.compareTo(s1)); // 104 - 72 = 32 : 기준 문자열(앞)이 더 커서 양수 출력
+		Assert.assertEquals(0, s1.compareTo(s1)); // 72 - 72 = 0 : 기준 문자열(앞)과 비교할 문자열(뒤)가 같아서 0
+		
+		String s3 = "aunt";
+		String s4 = "bee";
+		
+		Assert.assertEquals(-1, s3.compareTo(s4)); // aunt가 bee보다 사전 앞장에 실려 있다. 따라서 음수
+		Assert.assertEquals(1, s4.compareTo(s3)); // bee가 aunt보다 사전 뒷장에 실려 있다. 따라서 양수
+		Assert.assertEquals(0, s3.compareTo(s3));
+		
+		Assert.assertEquals(0, s1.compareToIgnoreCase(s2)); // 대소문자 무시하고 비교
+	}
+	
+//	@Test
+	public void testCompareString2() {
+		String s1 = "Happy new year"; 
+		String s2 = "happy new year"; 
+		
+		Assert.assertEquals(false, s1.equals(s2));
+		Assert.assertEquals(true, s1.equalsIgnoreCase(s2));
+	}
+	
+//	@Test
+	public void testCompareString3() {
+		String searchMe = "Green Eggs and Ham";
+		String findMe = "Eggs";
+		int searchMeLength = searchMe.length();
+		int findMeLength = findMe.length();
+		boolean foundIt = false;
+		for (int i = 0; i <= (searchMeLength - findMeLength); i++) {
+			if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+				// searchMe(기준 문자열)의 i번째 문자부터 findMe의 문자열과 비교를 하는데 findMe의 0번째 배열의 문자부터 findMeLength만큼 돌면서 비교한다. 
+				// 그 다음 다시 기준 문자열의 i++ 문자 비교를 계속한다. 
+				foundIt = true;
+				logger.debug("{}", i); // 6
+				logger.debug("{}", searchMe.substring(i, i + findMeLength));
+				break;
+			}
+		}
+		if (!foundIt) {
+			System.out.println("No match found.");
+		}
+	}
+	
+	@Test
+	public void testCompareString4() {
+		String s = "2021 begins";
+		Assert.assertEquals(false, s.matches("[b]")); // contains()와는 다르다 주어진 문자열과 동일한 패턴을 찾는 것이므로 
+		Assert.assertEquals(true, s.matches("[0-9]* begins"));	
+	}
+	
+	
 }
