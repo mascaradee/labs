@@ -74,7 +74,7 @@ public class ArrayTest {
 		logger.debug("{}", Arrays.toString(strArr)); // array 요소들을 로그 찍을때는 요걸 사용해야 원하는대로 나온다. 
 	}
 	
-	@Test
+//	@Test
 	public void testArray4() {
 		// 배열의 원하는 요소를 삭제하는 방법 2
 		String[] strArr = { "하나", "둘", "셋" };
@@ -87,5 +87,30 @@ public class ArrayTest {
 		    }
 		}
 		logger.debug("{}", Arrays.toString(copy));
+		logger.debug("{}", strArr.length);
+	}
+	
+//	@Test
+	public void testArrayCopy() {
+		char[] copyFrom = {'u','n','e','m','p','l','o','y','e','d'};
+		char[] copyTo = new char[8];
+		System.arraycopy(copyFrom, 2, copyTo, 0, 8);
+		logger.debug("{}", copyTo[0]);
+		logger.debug("{}", copyTo[1]);
+		logger.debug("{}", copyTo[2]);
+		logger.debug("{}", copyTo[3]);
+		logger.debug("{}", copyTo[4]);
+		logger.debug("{}", copyTo[5]);
+		logger.debug("{}", copyTo[6]);
+		logger.debug("{}", copyTo[7]);
+		logger.debug("{}", copyTo[8]);		
+		Assert.assertEquals("employed", new String(copyTo));
+	}
+	
+	@Test
+	public void testArrayCopy2() {
+		char[] copyFrom = {'u','n','e','m','p','l','o','y','e','d'};
+		char[] copyTo = java.util.Arrays.copyOfRange(copyFrom, 2, 10);		
+		Assert.assertEquals("employed", new String(copyTo));
 	}
 }
